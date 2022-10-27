@@ -13,4 +13,4 @@ chart = alt.Chart(data).mark_point().encode(
 # alt.renderers.enable('mimetype') # why is this not working? 
 
 chart.show() # to display in altair viewer (must be installed separately)
-# chart.save('filename.html') # manually save your chart as html and open it with a web browser
+chart.save('basic-chart.html') # manually save your chart as html and open it with a web browser
