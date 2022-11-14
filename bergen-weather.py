@@ -35,3 +35,21 @@ precip_chart_monthly = alt.Chart(cleaned_df).mark_line().encode(
     alt.Y('average(precipitation)')   
 )
 precip_chart_monthly.save('precip_chart_monthly.html')
+
+# Q: how does the daily temperature range change throughout the year?
+temp_chart_yearly = alt.Chart(cleaned_df).mark_bar().encode(
+    alt.Y('year(date)', type='quantitative'),
+    alt.X('mean(temp_range)', type='quantitative')
+).transform_calculate(
+    temp_range = 'datum.temp_max - datum.temp_min'
+)
+temp_chart_yearly.save('temp_chart_yearly.html')
+
+
+precip_temp = alt.Chart(cleaned_df).mark_point().encode(
+    alt.X('temp_max', type='quantitative', title='Maximum Daily Temperature (C)'),
+    alt.Y('mean(temp_range)', type='quantitative', title='Daily Temperature Range (deg C)')
+).transform_calculate(
+    temp_range = 'datum.temp_max - datum.temp_min'
+)
+precip_temp.show()
