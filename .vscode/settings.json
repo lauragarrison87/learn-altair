@@ -1,3 +1,4 @@
 {
-    "notebook.displayOrder": []
+    "notebook.displayOrder": [],
+    "python.analysis.typeCheckingMode": "off"
 }
