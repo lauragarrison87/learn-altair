@@ -34,4 +34,4 @@ scatter_plot_log = alt.Chart(source).mark_circle().encode(
         tooltip=['country', 'income', 'health', 'population']
     ).interactive()
 
-alt.hconcat(scatter_plot_linear,scatter_plot_log).save('./html_charts/scatter.html')
+alt.hconcat(scatter_plot_linear,scatter_plot_log).save('./basic_charts_html_output/scatter.html')

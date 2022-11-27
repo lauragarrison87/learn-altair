@@ -2,13 +2,13 @@ import altair as alt
 from vega_datasets import data
 import pandas as pd
 
-penguins_data = pd.read_json('data/penguins.json')
+penguins_data = pd.read_json('basic_charts_data/penguins.json')
 print(penguins_data.head())
 
 
 # how many of each species of penguin are there?
 penguin_species_bar = alt.Chart(penguins_data).mark_bar().encode(
-    y ='Species:N',
+    alt.Y('Species:N', sort='x'),
     x = 'count()',
     color = 'Species'
 ).properties(
@@ -18,7 +18,7 @@ penguin_species_bar = alt.Chart(penguins_data).mark_bar().encode(
 penguin_species_bar.configure_title(
     fontSize=20,
     anchor='start'
-).save('./html_charts/bar.html')
+).save('./basic_charts_html_output/bar.html')
     
 # how does beak depth distribution vary between penguin species?
 penguin_species_beak_depth_histo = alt.Chart(penguins_data).mark_bar(
@@ -35,6 +35,6 @@ penguin_species_beak_depth_histo = alt.Chart(penguins_data).mark_bar(
 penguin_species_beak_depth_histo.configure_title(
     fontSize=20,
     anchor='start'
-).save('./html_charts/histo.html')
+).save('./basic_charts_html_output/histo.html')
 
 

@@ -1,65 +1,73 @@
-"""
-Atmospheric CO2 Concentration
------------------------------
-This example is a fully developed line chart that uses a window transformation.
-It was inspired by `Gregor Aisch's work at datawrapper
-<https://www.datawrapper.de/_/OHgEm/>`_.
-"""
-# category: case studies
 import altair as alt
-from vega_datasets import data
+import pandas as pd
 
-source = data.co2_concentration.url
+# get data 
+source = pd.read_csv('./basic_charts_data/gapminder_ddf_1800_2014.csv')
+source['Year'] = pd.to_datetime(source['Year'], format='%Y')
 
-base = alt.Chart(
-    source,
-    title="Carbon Dioxide in the Atmosphere"
-).transform_calculate(
-    year="year(datum.Date)"
-).transform_calculate(
-    decade="floor(datum.year / 10)"
-).transform_calculate(
-    scaled_date="(datum.year % 10) + (month(datum.Date)/12)"
-).transform_window(
-    first_date='first_value(scaled_date)',
-    last_date='last_value(scaled_date)',
-    sort=[{"field": "scaled_date", "order": "ascending"}],
-    groupby=['decade'],
-    frame=[None, None]
-).transform_calculate(
-  end="datum.first_date === datum.scaled_date ? 'first' : datum.last_date === datum.scaled_date ? 'last' : null"
+alt.data_transformers.disable_max_rows() # enable altair to load data >5000 rows 
+
+brush = alt.selection(type='interval')
+
+# show for all years
+global_pop_all = alt.Chart(source).mark_line().encode(
+    alt.X(
+        'Year:T', 
+        timeUnit='year', 
+        # scale=alt.Scale(domain=x_domain),
+        title='Year'
+        ),
+    alt.Y(
+        'sum(Population):Q', 
+        # scale=alt.Scale(domain=y_domain)
+        ),
+    color='Region'
+).add_selection(
+    brush
+).properties(
+    width = 500, 
+    height = 400,
+    title='Global Population by Region: 1800-2014'
+)#.interactive()
+#.facet('Region:N',columns = 2)
+
+global_pop_all.configure_title(
+    fontSize=20,
+    anchor='start'
+)
+
+# compare population growth in different regions of world over time 
+# x_domain = ["1900", "1960"]
+# y_domain = [0, 1800000000]
+
+global_pop = alt.Chart(source).mark_line(
+    point=alt.OverlayMarkDef(),
+    clip=True
 ).encode(
-    x=alt.X(
-        "scaled_date:Q",
-        axis=alt.Axis(title="Year into Decade", tickCount=11)
-    ),
-    y=alt.Y(
-        "CO2:Q",
-        title="CO2 concentration in ppm",
-        scale=alt.Scale(zero=False)
-    )
+    alt.X(
+        'Year:T', 
+        timeUnit='year', 
+        # scale=alt.Scale(domain=x_domain),
+        title='Year'
+        ),
+    alt.Y(
+        'sum(Population):Q', 
+        # scale=alt.Scale(domain=y_domain)
+        ),
+    color='Region'
+).transform_filter(
+    brush
+).properties(
+    width = 500, 
+    height = 400,
+    title='Global Population by Region: Detail'
+)#.interactive()
+#.facet('Region:N',columns = 2)
+
+global_pop.configure_title(
+    fontSize=20,
+    anchor='start'
 )
 
-line = base.mark_line().encode(
-    color=alt.Color(
-        "decade:O",
-        scale=alt.Scale(scheme="magma"),
-        legend=None
-    )
-)
 
-text = base.encode(text="year:N")
-
-start_year = text.transform_filter(
-  alt.datum.end == 'first'
-).mark_text(baseline="top")
-
-end_year = text.transform_filter(
-  alt.datum.end == 'last'
-).mark_text(baseline="bottom")
-
-(line + start_year + end_year).configure_text(
-    align="left",
-    dx=1,
-    dy=3
-).properties(width=600, height=375).show()
+alt.vconcat(global_pop_all,global_pop).save('./basic_charts_html_output/line.html')

@@ -31,7 +31,7 @@ penguin_species = alt.Chart(penguins_data).mark_bar().encode(
 penguin_species.configure_title(
     fontSize=20,
     anchor='start'
-)#.save('penguin_species_histogram.html')
+)
 
 
-alt.vconcat(penguin_beak_mass, penguin_species).save('./html_charts/linked-scatter-bar.html')
+alt.vconcat(penguin_beak_mass, penguin_species).save('./basic_charts_html_output/linked-scatter-bar.html')

@@ -20,30 +20,31 @@ countries = pd.read_csv(
     "https://raw.githubusercontent.com/open-numbers/ddf--gapminder--systema_globalis/master/ddf--entities--geo--country.csv")
 # print(list(countries.columns))
 # print(countries['world_4region'].unique())
-print(countries[['country','name','world_4region']].head(10))
+# print(countries[['country','name','world_4region']].head(10))
 
 
-# # merge dataframes 
-# gapminder_df = (life_expectancy
-#                 .merge(income, on=["geo", "time"])
-#                 .merge(population, on=["geo", "time"]))
+# merge dataframes 
+gapminder_df = (life_expectancy
+                .merge(income, on=["geo", "time"])
+                .merge(population, on=["geo", "time"]))
 
-# gapminder_df = (gapminder_df
-#                 .merge(
-#                     countries[["country", "name", "world_4region"]], 
-#                     left_on="geo", right_on="country"))
+gapminder_df = (gapminder_df
+                .merge(
+                    countries[["country", "name", "world_4region"]], 
+                    left_on="geo", right_on="country"))
 
-# # drop unneeded columns and rename remaining
-# gapminder_df.drop(columns=["country"], inplace=True)
+# drop unneeded columns and rename remaining
+gapminder_df.drop(columns=["country"], inplace=True)
 
-# gapminder_df.rename(columns={"name": "Country",
-#                              "world_4region": "Region",
-#                              "time": "Year",
-#                              "life_expectancy_years": "Life Expectancy",
-#                              "population_total": "Population",
-#                              "income_per_person_gdppercapita_ppp_inflation_adjusted":
-#                              "Income",
-#                              "geo": "Country Code"},
-#                     inplace=True)
+gapminder_df.rename(columns={"name": "Country",
+                             "world_4region": "Region",
+                             "time": "Year",
+                             "life_expectancy_years": "Life Expectancy",
+                             "population_total": "Population",
+                             "income_per_person_gdppercapita_ppp_inflation_adjusted":
+                             "Income",
+                             "geo": "Country Code"},
+                    inplace=True)
 
-# print(gapminder_df.head())
+print(gapminder_df.head())
+gapminder_df.to_csv('basic_charts_data/gapminder_ddf_1800_2014.csv',index=False)
