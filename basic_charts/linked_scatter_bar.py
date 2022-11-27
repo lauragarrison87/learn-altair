@@ -34,4 +34,4 @@ penguin_species.configure_title(
 )#.save('penguin_species_histogram.html')
 
 
-alt.vconcat(penguin_beak_mass, penguin_species).show()
+alt.vconcat(penguin_beak_mass, penguin_species).save('./html_charts/linked-scatter-bar.html')
