@@ -5,7 +5,6 @@ def F_to_C(temp_F):
 import altair as alt
 import pandas as pd
 
-
 source = pd.read_csv('./basic_charts_data/bergen-weather.csv')
 
 # convert temp rows from F to C
@@ -13,15 +12,19 @@ for column in source[['TAVG', 'TMAX', 'TMIN']]:
     # Select column contents by column name using [] operator
     source[column] = source[column].apply(F_to_C)
 
-print(source.head())
-
 
 alt.Chart(
     source,
     title="2021-22 Daily High Temperature (C) in Bergen, Norway"
 ).mark_rect().encode(
-    x='date(DATE):O',
-    y='month(DATE):O',
+    alt.X(
+        'date(DATE):N',
+        # sort=alt.EncodingSortField(field='TMAX', op='max',order='descending')
+        ),
+    alt.Y(
+        'month(DATE):N',
+        # sort=alt.EncodingSortField(field='TMAX', op='mean',order='descending')
+        ),
     color=alt.Color('TMAX:Q', scale=alt.Scale(scheme="inferno")),
     tooltip=[
         alt.Tooltip('monthdate(DATE):T', title='Date'),
