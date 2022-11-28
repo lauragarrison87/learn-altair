@@ -1,5 +1,4 @@
 import altair as alt
-from vega_datasets import data
 import pandas as pd
 
 penguins_data = pd.read_json('basic_charts_data/penguins.json')

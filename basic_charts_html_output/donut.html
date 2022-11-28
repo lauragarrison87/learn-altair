@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .error {
+        color: red;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega@5"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-lite@4.17.0"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-embed@6"></script>
+</head>
+<body>
+  <div id="vis"></div>
+  <script>
+    (function(vegaEmbed) {
+      var spec = {"config": {"view": {"continuousWidth": 400, "continuousHeight": 300, "strokeWidth": 0}}, "data": {"name": "data-01b4fa8b3cd43c3dac7fc3ced53e9bba"}, "facet": {"field": "Island", "type": "nominal"}, "spec": {"mark": {"type": "arc", "innerRadius": 50}, "encoding": {"color": {"field": "Species", "type": "nominal"}, "theta": {"field": "Island_Species_frac", "type": "quantitative"}, "tooltip": [{"field": "Species", "title": "Species", "type": "nominal"}, {"field": "Island_Species_frac", "title": "Fraction penguin species on island", "type": "quantitative"}]}, "height": 150, "width": 150}, "columns": 3, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json", "datasets": {"data-01b4fa8b3cd43c3dac7fc3ced53e9bba": [{"Island": "Biscoe", "Species": "Adelie", "Species_count": 44, "Species_sum": 168, "Island_Species_frac": 0.26}, {"Island": "Biscoe", "Species": "Gentoo", "Species_count": 124, "Species_sum": 168, "Island_Species_frac": 0.74}, {"Island": "Dream", "Species": "Adelie", "Species_count": 56, "Species_sum": 124, "Island_Species_frac": 0.45}, {"Island": "Dream", "Species": "Chinstrap", "Species_count": 68, "Species_sum": 124, "Island_Species_frac": 0.55}, {"Island": "Torgersen", "Species": "Adelie", "Species_count": 52, "Species_sum": 52, "Island_Species_frac": 1.0}]}};
+      var embedOpt = {"mode": "vega-lite"};
+
+      function showError(el, error){
+          el.innerHTML = ('<div class="error" style="color:red;">'
+                          + '<p>JavaScript Error: ' + error.message + '</p>'
+                          + "<p>This usually means there's a typo in your chart specification. "
+                          + "See the javascript console for the full traceback.</p>"
+                          + '</div>');
+          throw error;
+      }
+      const el = document.getElementById('vis');
+      vegaEmbed("#vis", spec, embedOpt)
+        .catch(error => showError(el, error));
+    })(vegaEmbed);
+
+  </script>
+</body>
+</html>
