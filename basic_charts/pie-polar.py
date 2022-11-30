@@ -59,4 +59,10 @@ c1 = coxcomb.mark_arc(innerRadius=20, stroke="#fff").configure_view(
     strokeWidth=0
 ).save('./basic_charts_html_output/coxcomb.html')
 
+# bar version of coxcomb for comparison
+bar_version = alt.Chart(species_count_all).mark_bar().encode(
+    alt.Y('Species_count:Q',stack='normalize'),
+    color='Species:N'
+).save('./basic_charts_html_output/coxcomb_bar_version.html')
+
 

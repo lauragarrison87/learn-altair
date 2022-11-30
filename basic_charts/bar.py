@@ -1,7 +1,7 @@
 import altair as alt
 import pandas as pd
 
-penguins_data = pd.read_json('basic_charts_data/penguins.json')
+penguins_data = pd.read_json('./basic_charts_data/penguins.json')
 print(penguins_data.head())
 
 
