@@ -4,7 +4,6 @@ import pandas as pd
 penguins_data = pd.read_json("./basic_charts_data/penguins.json")
 print(penguins_data.head())
 
-
 # how many of each species of penguin are there?
 penguin_species_bar = (
     alt.Chart(penguins_data)

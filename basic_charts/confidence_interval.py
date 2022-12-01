@@ -1,8 +1,18 @@
 import altair as alt
-from vega_datasets import data
+import pandas as pd
 
-cars = data.cars()
+source = pd.read_csv("./basic_charts_data/bergen_weather.csv")
 
-alt.Chart(cars).mark_area(opacity=0.3).encode(
-    x="Year:T", color="Origin", y="ci0(Miles_per_Gallon)", y2="ci1(Miles_per_Gallon)"
-).save("./basic_charts_html_output/confidence_interval.html")
+ci = (
+    alt.Chart(source)
+    .mark_errorband(extent="ci", opacity=0.2)
+    .encode(
+        alt.X("month(DATE)"),
+        alt.Y("PRCP:Q", title="Precip"),
+    )
+    .properties(title="Average Monthly Rain in 2022 with 95% CI")
+)
+
+line = ci.mark_line().encode(alt.Y("average(PRCP):Q"))
+
+(line + ci).save("./basic_charts_html_output/confidence_interval.html")

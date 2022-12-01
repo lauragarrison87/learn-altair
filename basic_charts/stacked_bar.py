@@ -45,7 +45,7 @@ penguin_species_bar = (
         #   sort='ascending'
         # )
     )
-    .properties(title="Penguin Gender\nby Species")
+    .properties(title="Penguin Gender by Species")
 )
 
 penguin_species_bar.configure_title(fontSize=20, anchor="start").save(

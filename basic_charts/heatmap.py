@@ -5,12 +5,7 @@ def F_to_C(temp_F):
 import altair as alt
 import pandas as pd
 
-source = pd.read_csv("./basic_charts_data/bergen-weather.csv")
-
-# convert temp rows from F to C
-for column in source[["TAVG", "TMAX", "TMIN"]]:
-    # Select column contents by column name using [] operator
-    source[column] = source[column].apply(F_to_C)
+source = pd.read_csv("./basic_charts_data/bergen_weather.csv")
 
 
 alt.Chart(

@@ -17,25 +17,18 @@ global_pop_all = (
         alt.X(
             "Year:T",
             timeUnit="year",
-            # scale=alt.Scale(domain=x_domain),
             title="Year",
         ),
         alt.Y(
             "sum(Population):Q",
-            # scale=alt.Scale(domain=y_domain)
         ),
         color="Region",
     )
     .add_selection(brush)
     .properties(width=500, height=400, title="Global Population by Region: 1800-2014")
-)  # .interactive()
-# .facet('Region:N',columns = 2)
-
+)
 global_pop_all.configure_title(fontSize=20, anchor="start")
 
-# compare population growth in different regions of world over time
-# x_domain = ["1900", "1960"]
-# y_domain = [0, 1800000000]
 
 global_pop = (
     alt.Chart(source)
@@ -44,20 +37,16 @@ global_pop = (
         alt.X(
             "Year:T",
             timeUnit="year",
-            # scale=alt.Scale(domain=x_domain),
             title="Year",
         ),
         alt.Y(
             "sum(Population):Q",
-            # scale=alt.Scale(domain=y_domain)
         ),
         color="Region",
     )
     .transform_filter(brush)
     .properties(width=500, height=400, title="Global Population by Region: Detail")
-)  # .interactive()
-# .facet('Region:N',columns = 2)
-
+)
 global_pop.configure_title(fontSize=20, anchor="start")
 
 

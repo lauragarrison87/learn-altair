@@ -41,7 +41,7 @@ precip_binned.save("./weather_case_study/output/precip_binned.html")
 # how does the rain amount break down per month? Are there really dry/really rainy months?
 precip_time_month = (
     alt.Chart(bergen_florida)
-    .mark_line()
+    .mark_line(color="black")
     .encode(
         alt.X("yearmonth(DATE):T"),
         alt.Y("average(PRCP)"),
@@ -49,54 +49,18 @@ precip_time_month = (
             alt.Tooltip("average(PRCP):Q", format=",.2f", title="Avg month precip")
         ],
     )
-    .properties(title="Average Monthly Rain in Bergen in 2022", width=500, height=500)
+    .properties(title="Average Monthly Rain in Bergen in 2022", width=800, height=500)
 )
 precip_time_month.save("./weather_case_study/output/precip_time_month.html")
 
 # so this gives the average, but what if I want to show the full range here?
-points = precip_time_month.mark_circle(opacity=0.3).encode(
-    alt.Y("PRCP"), tooltip=["DATE:T", "PRCP"]
+points = precip_time_month.mark_circle(opacity=0.7).encode(
+    alt.X("DATE:T"),
+    alt.Y("PRCP"),
+    alt.Color("month(DATE):N", scale=alt.Scale(scheme="tableau20")),
+    tooltip=["DATE:T", "PRCP"],
 )
 
 (precip_time_month + points).save(
     "./weather_case_study/output/precip_time_month_avg_ind.html"
-)
-
-# there is a lot of overplotting, what about instead of using opacity I add a jitter? from [https://altair-viz.github.io/gallery/stripplot.html]
-beeswarm = (
-    alt.Chart(bergen_florida)
-    .mark_circle(size=15)
-    .encode(
-        x=alt.X(
-            "jitter:Q",
-            title=None,
-            axis=alt.Axis(values=[0], ticks=True, grid=False, labels=False),
-            scale=alt.Scale(),
-        ),
-        y=alt.Y("PRCP:Q"),
-        # color=alt.Color('Major_Genre:N', legend=None),
-        column=alt.Column(
-            "month(DATE):T",
-            # header=alt.Header(
-            #     labelAngle=-90,
-            #     titleOrient="bottom",
-            #     labelOrient="bottom",
-            #     labelAlign="right",
-            #     labelPadding=3,
-            # ),
-        ),
-    )
-    .transform_calculate(
-        # Generate Gaussian jitter with a Box-Muller transform
-        jitter="sqrt(-2*log(random()))*cos(2*PI*random())"
-    )
-    .configure_facet(spacing=0)
-    .configure_view(stroke=None)
-    .properties(title="Monthly Rain in Bergen in 2022", width=50, height=500)
-)
-beeswarm.save("weather_case_study/output/precip_2022_beeswarm.html")
-
-average_beeswarm = beeswarm.mark_line().encode(alt.Y("average(PRCP)"))
-(beeswarm + average_beeswarm).save(
-    "./weather_case_study/output/precip_time_bees_avg.html"
 )
