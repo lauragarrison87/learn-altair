@@ -85,4 +85,4 @@ origin_labels = base.mark_text(baseline="middle", align="center").encode(
     .configure_view(stroke="")
     .configure_concat(spacing=10)
     .configure_axis(domain=False, ticks=False, labels=False, grid=False)
-).save('./basic_charts_html_output/treemap_altair.html')
+).save("./basic_charts_html_output/treemap_altair.html")
