@@ -22,6 +22,35 @@ This is a comma-delimited table listing the modification sites for three human p
 * For each modification, the column "classification" indicates if it is an *in vivo* modification, a chemical derivative, an artefact, etc.
 * For the 3 human proteins, the column "PathogenicMutation" indicates if the site is mutated in a disease (according to the ClinVar database: https://www.ncbi.nlm.nih.gov/clinvar/). 
 
+Detail of each data attribute:
+1. UniAcc
+Protein ID in UniProt database (this is just a unique identifier for the protein for a given species, e.g., human)
+
+2. RES
+Amino acid residues - there are 20 different amino acids, each have a unique single letter ID
+
+3. POS
+The location ID of a given residue in a given protein 
+
+4. MOD
+Specific modification that is occurring at that site. 
+
+
+5. Entry
+Similar to UniAcc except more human-readable, identifies the gene+species of protein together as one string
+
+6. Gene
+Name of gene that encodes the resulting protein
+
+7. Species
+Species that protein comes from, e.g., human, mouse
+
+8. classification
+High-level classification of the type of modification that is occurring at the site. This is a more coarse-grained classification relative to MOD attribute
+
+9. PathogenicMutation
+Boolean. If True, means that this site is associated with a disease
+
 
 ## Tasks 
 
