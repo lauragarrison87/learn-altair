@@ -25,6 +25,9 @@ Local data source resides in [`./weather_case_study/data`](./weather_case_study/
 The python files write charts out in `html` format to [`./weather_case_study/output`](./weather_case_study/output). The files in this directory are numbered in order of how I explored the data to answer the question, *Has it really rained that much in Bergen this year?*
 
 
-## Animation 
+## Animation
 
-This section explores how to incorporate animation into Vega-Altair charts. At this time (Dec 2022), this charting library does not natively support animation, so we have to add in other tools to make this work. 
+This section explores how to incorporate animation into Vega-Altair charts. At this time (Dec 2022), this charting library does not natively support animation, so we have to add other tools to make this work. 
+
+1. GapMinder Data: Health vs. Wealth over time 
+2. Wind flux (adapted from [Wind Vector Map](https://altair-viz.github.io/gallery/wind_vector_map.html))
