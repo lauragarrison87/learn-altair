@@ -5,3 +5,6 @@ print(df.head())
 
 residues = df["RES"].unique()
 mods = df["MOD"].unique()
+types = df["classification"].unique()
+
+print(types)
