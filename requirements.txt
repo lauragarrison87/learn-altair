@@ -15,9 +15,9 @@ gitdb
 GitPython
 idna
 importlib-metadata
-Jinja2=
-jsonschema=
-MarkupSafe=
+Jinja2
+jsonschema
+MarkupSafe
 mypy-extensions
 networkx
 numpy
