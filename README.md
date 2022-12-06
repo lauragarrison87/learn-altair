@@ -12,7 +12,7 @@ Run these files from the root directory so that the local data source is findabl
 
     python3 ./basic_charts/bar.py
 
-Each of these files saves a chart in `html` format, which outputs to [`basic_charts_html_output`](./basic_charts_html_output/).
+Each of these files saves a chart in `html` format, which will output to [`basic_charts_html_output`](./basic_charts_html_output/).
 
 ## Weather Exploration
 
@@ -22,12 +22,14 @@ Local data source resides in [`./weather_case_study/data`](./weather_case_study/
 
     python3 ./weather_case_study/bergen_weather.py
 
-The python files write charts out in `html` format to [`./weather_case_study/output`](./weather_case_study/output). The files in this directory are numbered in order of how I explored the data to answer the question, *Has it really rained that much in Bergen this year?*
+The python files write charts out in `html` format to [`./weather_case_study/output`](./weather_case_study/output). These files are numbered in order of how I explored the data to answer the question, *Has it really rained that much in Bergen this year?*
 
 
 ## Animation
 
-This section explores how to incorporate animation into Vega-Altair charts. At this time (Dec 2022), this charting library does not natively support animation, so we have to add other tools to make this work. 
+This section explores how to incorporate animation into Vega-Altair charts. At this time (Dec 2022), this charting library does not natively support animation, so we have to add other tools to make this work. I've chosen to use [Streamlit](https://docs.streamlit.io/).
 
-1. GapMinder Data: Health vs. Wealth over time 
-2. Wind flux (adapted from [Wind Vector Map](https://altair-viz.github.io/gallery/wind_vector_map.html))
+1. Wind flux (adapted from [Wind Vector Map](https://altair-viz.github.io/gallery/wind_vector_map.html))
+One of the versions of this is deployed via Streamlit: [Wind Flux](https://lauragarrison87-learn-alta-animationwind-steps-btn-slide-2a6u5v.streamlit.app/)
+
+2. GapMinder Data: Health vs. Wealth over time  *coming soon*
