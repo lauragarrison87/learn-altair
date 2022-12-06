@@ -40,7 +40,7 @@ def get_data(mydata):
 
 
 # from https://altair-viz.github.io/gallery/wind_vector_map.html example on Vega-Altair documentation site
-source = get_data("./data/wind.csv")
+source = get_data("./animation/data/wind.csv")
 print(source.describe())
 
 # build the Altair chart
