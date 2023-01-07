@@ -6,17 +6,17 @@ Content for 2022 ICTP Collaborative programming school
 
 Code for some of the basic visualization idioms in Vega-Altair available in [`./basic_charts`](./basic_charts/). 
 
-The local data inputs for these charts can be found in [`./basic_charts_data`](./basic_charts_data/). 
+The local data inputs for these charts can be found in [`./basic_charts/data`](./basic_charts/data/). 
 
-Run these files from the root directory so that the local data source is findable. For example: 
+Run these files from inside the [`./basic_charts`](./basic_charts/) directory so that the local data source is findable. For example: 
 
-    python3 ./basic_charts/bar.py
+    python3 ./bar.py
 
-Each of these files saves a chart in `html` format, which will output to [`basic_charts_html_output`](./basic_charts_html_output/).
+Each of these files saves a chart in `html` format, which will output to [`basic_charts/html_output`](./basic_charts/html_output/).
 
 ## Weather Exploration
 
-For a practical example of using visualization to help answer a question, we have a dataset of the daily weather summary from Bergen, Norway, from 2018-22, downloaded from [NOAA](https://www.ncdc.noaa.gov/cdo-web/datasets). 
+For a practical example of using visualization to ask questions about your data, we have a dataset of the daily weather summary from Bergen, Norway, from 2018-22, downloaded from [NOAA](https://www.ncdc.noaa.gov/cdo-web/datasets). 
 
 Local data source resides in [`./weather_case_study/data`](./weather_case_study/data). Run the python files from `./weather_case_study`, for example:
 

@@ -3,7 +3,7 @@ from vega_datasets import data
 import pandas as pd
 
 # get data
-penguins_data = pd.read_json("basic_charts_data/penguins.json")
+penguins_data = pd.read_json("./data/penguins.json")
 
 # clean data
 penguins_data = penguins_data.dropna()
@@ -26,9 +26,7 @@ penguin_species_bar = (
     .properties(title="Penguin Gender\nby Species")
 )
 
-penguin_species_bar.configure_title(fontSize=20, anchor="start").save(
-    "./basic_charts_html_output/stacked_bar.html"
-)
+penguin_species_bar.configure_title(fontSize=20, anchor="start").show()#.save("./html_output/stacked_bar.html")
 
 
 # normalized version of chart
@@ -48,6 +46,4 @@ penguin_species_bar = (
     .properties(title="Penguin Gender by Species")
 )
 
-penguin_species_bar.configure_title(fontSize=20, anchor="start").save(
-    "./basic_charts_html_output/normalized_stacked_bar.html"
-)
+penguin_species_bar.configure_title(fontSize=20, anchor="start").show()#.save("./html_output/normalized_stacked_bar.html")

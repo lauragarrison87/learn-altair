@@ -42,6 +42,4 @@ scatter_plot_log = (
     .interactive()
 )
 
-alt.hconcat(scatter_plot_linear, scatter_plot_log).save(
-    "./basic_charts_html_output/scatter.html"
-)
+alt.hconcat(scatter_plot_linear, scatter_plot_log).save("./html_output/scatter.html")

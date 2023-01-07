@@ -1,7 +1,7 @@
 import altair as alt
 import pandas as pd
 
-penguins_data = pd.read_json("basic_charts_data/penguins.json")
+penguins_data = pd.read_json("./data/penguins.json")
 print(penguins_data.head())
 
 brush = alt.selection(type="interval")
@@ -31,6 +31,4 @@ penguin_species = (
 penguin_species.configure_title(fontSize=20, anchor="start")
 
 
-alt.vconcat(penguin_beak_mass, penguin_species).save(
-    "./basic_charts_html_output/linked-scatter-bar.html"
-)
+alt.vconcat(penguin_beak_mass, penguin_species).show()#.save("./html_output/linked-scatter-bar.html")

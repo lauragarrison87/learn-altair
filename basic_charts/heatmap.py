@@ -5,19 +5,17 @@ def F_to_C(temp_F):
 import altair as alt
 import pandas as pd
 
-source = pd.read_csv("./basic_charts_data/bergen_weather.csv")
+source = pd.read_csv("./data/bergen_weather.csv")
 
 
-alt.Chart(
+heatmap = alt.Chart(
     source, title="2021-22 Daily High Temperature (C) in Bergen, Norway"
 ).mark_rect().encode(
     alt.X(
         "date(DATE):N",
-        # sort=alt.EncodingSortField(field='TMAX', op='max',order='descending')
     ),
     alt.Y(
         "month(DATE):N",
-        # sort=alt.EncodingSortField(field='TMAX', op='mean',order='descending')
     ),
     color=alt.Color("TMAX:Q", scale=alt.Scale(scheme="inferno")),
     tooltip=[
@@ -26,6 +24,7 @@ alt.Chart(
     ],
 ).properties(
     width=550
-).save(
-    "./basic_charts_html_output/heatmap.html"
 )
+heatmap.show()
+
+#heatmap.save("./html_output/heatmap.html")

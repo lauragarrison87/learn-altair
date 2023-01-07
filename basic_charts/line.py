@@ -2,7 +2,7 @@ import altair as alt
 import pandas as pd
 
 # get data
-source = pd.read_csv("./basic_charts_data/gapminder_ddf_1800_2014.csv")
+source = pd.read_csv("./data/gapminder_ddf_1800_2014.csv")
 source["Year"] = pd.to_datetime(source["Year"], format="%Y")
 
 alt.data_transformers.disable_max_rows()  # enable altair to load data >5000 rows
@@ -50,4 +50,4 @@ global_pop = (
 global_pop.configure_title(fontSize=20, anchor="start")
 
 
-alt.vconcat(global_pop_all, global_pop).save("./basic_charts_html_output/line.html")
+alt.vconcat(global_pop_all, global_pop).show()#.save("./html_output/line.html")

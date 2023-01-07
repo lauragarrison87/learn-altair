@@ -2,7 +2,7 @@ import altair as alt
 import pandas as pd
 
 # Read in and prep data
-source = pd.read_json("basic_charts_data/penguins.json")
+source = pd.read_json("./data/penguins.json")
 source_cropped = source[["Species", "Island"]]
 
 island_species_count = (
@@ -49,7 +49,7 @@ pie = (
     )
     .facet("Island:N", columns=3)
     .configure_view(strokeWidth=0)
-    .save("./basic_charts_html_output/pie.html")
+    .save("./html_output/pie.html")
 )
 
 # Donut chart radial variant
@@ -72,7 +72,7 @@ donut = (
     )
     .facet("Island:N", columns=3)
     .configure_view(strokeWidth=0)
-    .save("./basic_charts_html_output/donut.html")
+    .save("./html_output/donut.html")
 )
 
 
@@ -88,7 +88,7 @@ coxcomb = alt.Chart(species_count_all).encode(
 c1 = (
     coxcomb.mark_arc(innerRadius=20, stroke="#fff")
     .configure_view(strokeWidth=0)
-    .save("./basic_charts_html_output/coxcomb.html")
+    .save("./html_output/coxcomb.html")
 )
 
 # bar version of coxcomb for comparison
@@ -96,5 +96,5 @@ bar_version = (
     alt.Chart(species_count_all)
     .mark_bar()
     .encode(alt.Y("Species_count:Q", stack="normalize"), color="Species:N")
-    .save("./basic_charts_html_output/coxcomb_bar_version.html")
+    .save("./html_output/coxcomb_bar_version.html")
 )

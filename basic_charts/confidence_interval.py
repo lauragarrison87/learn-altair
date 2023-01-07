@@ -1,7 +1,7 @@
 import altair as alt
 import pandas as pd
 
-source = pd.read_csv("./basic_charts_data/bergen_weather.csv")
+source = pd.read_csv("./data/bergen_weather.csv")
 
 ci = (
     alt.Chart(source)
@@ -15,4 +15,5 @@ ci = (
 
 line = ci.mark_line().encode(alt.Y("average(PRCP):Q"))
 
-(line + ci).save("./basic_charts_html_output/confidence_interval.html")
+(line + ci).show()
+# (line + ci).save("./html_output/confidence_interval.html")

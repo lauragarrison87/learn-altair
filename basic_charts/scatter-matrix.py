@@ -2,7 +2,7 @@ import altair as alt
 import pandas as pd
 
 # Read in and prep data
-source = pd.read_json("basic_charts_data/penguins.json")
+source = pd.read_json("./data/penguins.json")
 print(source.head())
 
 # adapt from the cars dataset
@@ -18,6 +18,4 @@ alt.Chart(source).mark_circle().encode(
         "Flipper Length (mm)",
         "Body Mass (g)",
     ],
-).interactive().save(
-    "./basic_charts_html_output/scatter-matrix.html"
-)
+).interactive().show()#.save("./html_output/scatter-matrix.html")
