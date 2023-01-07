@@ -1,7 +1,7 @@
 import altair as alt
 import pandas as pd
 
-penguins_data = pd.read_json("./basic_charts_data/penguins.json")
+penguins_data = pd.read_json("./data/penguins.json")
 print(penguins_data.head())
 
 # how many of each species of penguin are there?
@@ -12,20 +12,22 @@ penguin_species_bar = (
     .properties(title="Number of Penguins by Species")
 )
 
-penguin_species_bar.configure_title(fontSize=20, anchor="start").save(
-    "./html_output/bar.html"
-)
+penguin_species_bar.configure_title(fontSize=20, anchor="start")
+# penguin_species_bar.configure_axisX()
+# penguin_species_bar.configure_axisY()
+
+penguin_species_bar.save("./html_output/bar.html")
 
 # how does beak depth distribution vary between penguin species?
-penguin_species_beak_depth_histo = (
-    alt.Chart(penguins_data)
-    .mark_bar(opacity=0.3, binSpacing=0)
-    .encode(
-        alt.X("Beak Depth (mm)", bin=True),
-        alt.Y("count()", stack=None),
-        alt.Color("Species:N"),
-    )
-    .properties(title="Penguin Beak Depth by Species")
-)
+# penguin_species_beak_depth_histo = (
+#     alt.Chart(penguins_data)
+#     .mark_bar(opacity=0.3, binSpacing=0)
+#     .encode(
+#         alt.X("Beak Depth (mm)", bin=True),
+#         alt.Y("count()", stack=None),
+#         alt.Color("Species:N"),
+#     )
+#     .properties(title="Penguin Beak Depth by Species")
+# )
 
-penguin_species_beak_depth_histo.configure_title(fontSize=20, anchor="start").save("./html_output/histo.html")
+# penguin_species_beak_depth_histo.configure_title(fontSize=20, anchor="start").save("./html_output/histo.html")
