@@ -13,7 +13,7 @@ penguin_species_bar = (
 )
 
 penguin_species_bar.configure_title(fontSize=20, anchor="start").save(
-    "./basic_charts_html_output/bar.html"
+    "./html_output/bar.html"
 )
 
 # how does beak depth distribution vary between penguin species?
@@ -28,4 +28,4 @@ penguin_species_beak_depth_histo = (
     .properties(title="Penguin Beak Depth by Species")
 )
 
-penguin_species_beak_depth_histo.configure_title(fontSize=20, anchor="start").show()#.save("./html_output/histo.html")
+penguin_species_beak_depth_histo.configure_title(fontSize=20, anchor="start").save("./html_output/histo.html")
