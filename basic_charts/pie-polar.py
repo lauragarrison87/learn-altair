@@ -15,6 +15,7 @@ species_count = source_cropped.groupby(["Island"]).count().reset_index()
 merged = pd.merge(
     island_species_count, species_count, on="Island", suffixes=["", "_sum"]
 )
+print(species_count)
 
 merged["Island_Species_frac"] = round(
     merged["Species_count"] / merged["Species_sum"], 2

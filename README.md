@@ -12,7 +12,7 @@ Run these files from inside the [`./basic_charts`](./basic_charts/) directory so
 
     python3 ./bar.py
 
-Each of these files saves a chart in `html` format, which will output to [`basic_charts/html_output`](./basic_charts/html_output/).
+Each of these files saves a chart in `html` format, which will output to [`./basic_charts/html_output`](./basic_charts/html_output/).
 
 ## Weather Exploration
 
