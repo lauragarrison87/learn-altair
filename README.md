@@ -1,6 +1,11 @@
-# Visualization in your development process 
+# Visualization in Your Development Process
+Author: Laura Ann Garrison
 
-Content for 2022 ICTP Collaborative programming school
+Visualization Content for [2022 ICTP Collaborative Scientific Software Development and Management of Open Source Scientific Packages](https://indico.ictp.it/event/9781/)
+28 Nov - 9 Dec 2022
+Trieste, Italy
+
+Lecture slides on visualization and visual data science foundations available in [./vis_slides](./vis_slides/). Visualization idiom examples all provided in [Vega-Altair](https://altair-viz.github.io/). 
 
 ## Vega-Altair Basics 
 
