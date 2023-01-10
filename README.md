@@ -13,6 +13,8 @@ Code for some of the basic visualization idioms in Vega-Altair available in [`./
 
 The local data inputs for these charts can be found in [`./basic_charts/data`](./basic_charts/data/). 
 
+Install necessary packages to use Vega-Altair by running `pip install -r requirements.txt` from the root directory of this repository. 
+
 Run these files from inside the [`./basic_charts`](./basic_charts/) directory so that the local data source is findable. For example: 
 
     python3 ./bar.py
