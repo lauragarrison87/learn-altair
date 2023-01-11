@@ -23,7 +23,10 @@ precip = (
         y=alt.Y("sum(PRCP):Q", title="Total Precipitation (mm)", stack=True),
         color=color,
     )
-    .properties(width=800,height=200,title="Monthly Average Precipitation")
+    .properties(
+        width=800,
+        height=100,
+        title="Monthly Average Precipitation")
     .add_selection(brush)
     .add_selection(year_selection)
     .transform_filter(year_selection)
@@ -35,29 +38,37 @@ temp_line = (
     .encode(
         x=alt.X("monthdate(DATE):T", title="Month", axis=alt.Axis(grid=False)), # date binned by month
         y=alt.Y("TAVG:Q", title="Mean Temperature Range (C)", stack=None),
-        color=alt.value("darkgray"),
-        tooltip="yearmonth(DATE):T"
+        color=alt.value("black"),
+        opacity=alt.value(0.4),
+        tooltip=[
+            alt.Tooltip("yearmonth(DATE):T", title="Date"), 
+            alt.Tooltip("TMAX", title="Max Temp"), 
+            alt.Tooltip("TAVG", title="Avg Temp"), 
+            alt.Tooltip("TMIN", title="Min Temp")
+            ]
     )
-    .properties(width=800,height=200,title="Monthly Average Temperature")
+    .properties(
+        width=800,
+        height=300,
+        title="Monthly Average Temperature")
     .transform_filter(year_selection)
     .transform_filter(brush)
 )
 
-temp_range = alt.Chart(bergen_florida_5y).mark_bar().encode(
+temp_range = temp_line.mark_bar().encode(
         y=alt.Y("TMIN:Q"),
         y2=alt.Y2("TMAX:Q"),
-        x=alt.X("monthdate(DATE):T"),
+        # x=alt.X("monthdate(DATE):T"),
         color=alt.Color("TAVG:Q", scale=alt.Scale(scheme="redyellowblue"), sort="descending"),
-        opacity=alt.value(0.6),
+        opacity=alt.value(0.9),
         size=alt.value(2)
-    ).properties(width=800,height=200
     ).transform_filter(brush)
 
 
 
 # combine charts to one view
 alt.vconcat(
-    precip,temp_range+temp_line
+    temp_range+temp_line,precip
     ).configure_view(strokeWidth=0
     ).show()
 
