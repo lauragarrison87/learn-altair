@@ -42,14 +42,13 @@ precip = (
     .transform_filter(select_year)
 ).interactive()
 
-
 # temp monthly line chart 
 temp = (
     alt.Chart() 
     .mark_line()
     .encode(
-        alt.X("month(DATE):T", title="Month"), # date binned by month
-        alt.Y("mean(TAVG):Q", title="Mean Temperature Range (C)", stack=None), # monthly sum of precipitation
+        alt.X("monthdate(DATE):T", title="Month"), # date binned by month
+        alt.Y("TAVG:Q", title="Mean Temperature Range (C)", stack=None), # monthly sum of precipitation
         color=alt.Color("DATE_YEAR:N"), # stacked bar chart,
         tooltip="yearmonth(DATE):T"
     )
@@ -58,17 +57,15 @@ temp = (
 ).interactive()
 
 # temp daily line chart 
-temp_daily = (
+temp_daily_range = (
     alt.Chart() 
-    .mark_circle(opacity=0.4)
+    .mark_area(opacity=0.4)
     .encode(
         alt.X("monthdate(DATE):T"), # date binned by month
-        alt.Y("TMIN:Q", stack=None), # monthly sum of precipitation
+        alt.Y("TMIN:Q"), # monthly sum of precipitation
+        alt.Y2("TMAX:Q"),
         color=alt.Color("DATE_YEAR:N"), # stacked bar chart
-        tooltip=["DATE:T"]
-    )
-    .transform_calculate(
-        temp_range="datum.TMAX - datum.TMIN"
+        tooltip=["DATE:T","TMAX:Q","TMIN:Q"]
     )
     .properties(width=600,height=200)
     .transform_filter(select_year)
@@ -76,8 +73,37 @@ temp_daily = (
 
 # combine charts to one view
 alt.vconcat(
-    year_selector,temp,precip, data=bergen_florida_5y
+    year_selector,precip,temp+temp_daily_range, data=bergen_florida_5y
     ).configure_view(strokeWidth=0
     ).show()
 
-# temperature dumbbell chart 
+# temperature dumbbell chart
+max_temp = alt.Chart().mark_circle().encode(
+    alt.X("monthdate(DATE):T"), # date binned by month
+    alt.Y("TMAX:Q"),
+    color=alt.Color("DATE_YEAR:N"),
+    tooltip=["DATE:T","TMAX:Q","TMIN:Q"]
+).properties(width=600,height=200
+).transform_filter(select_year
+).interactive()
+
+temp_min = alt.Chart().mark_circle().encode(
+    alt.X("monthdate(DATE):T"), # date binned by month
+    alt.Y("TMIN:Q"),
+    color=alt.Color("DATE_YEAR:N"),
+    tooltip=["DATE:T","TMAX:Q","TMIN:Q"]
+).transform_filter(select_year
+)
+
+temp_range =  alt.Chart() .mark_area(opacity=0.4).encode(
+        alt.X("monthdate(DATE):T"), # date binned by month
+        alt.Y("TMIN:Q"), # monthly sum of precipitation
+        alt.Y2("TMAX:Q"),
+        color=alt.Color("DATE_YEAR:N"), # stacked bar chart
+        tooltip=["DATE:T","TMAX:Q","TMIN:Q"]
+    ).transform_filter(select_year)
+
+# alt.vconcat(
+#     year_selector,precip,max_temp+temp_min+temp_range, data=bergen_florida_5y
+#     ).configure_view(strokeWidth=0
+#     ).show()
