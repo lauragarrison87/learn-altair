@@ -3,9 +3,7 @@ from vega_datasets import data
 
 # from https://github.com/vega/vega-datasets/tree/master/data
 
-source = data.gapminder_health_income()
-print(source.head())
-
+source = data.gapminder_health_income.url
 
 # truncate y axis for more spread out representation
 scatter_plot_linear = (
@@ -17,7 +15,7 @@ scatter_plot_linear = (
         color=alt.value("steelblue"),
         # fillOpacity=alt.value(0.5),
         strokeOpacity=alt.value(1),
-        tooltip=["country", "income", "health", "population"],
+        tooltip=["country:N", "income:Q", "health:Q", "population:Q"],
     )
     .interactive()
 )
@@ -37,9 +35,9 @@ scatter_plot_log = (
         ),
         # fillOpacity=alt.value(0.5),
         strokeOpacity=alt.value(1),
-        tooltip=["country", "income", "health", "population"],
+        tooltip=["country:N", "income:Q", "health:Q", "population:Q"],
     )
     .interactive()
 )
 
-alt.hconcat(scatter_plot_linear, scatter_plot_log).save("./html_output/scatter.html")
+alt.hconcat(scatter_plot_linear, scatter_plot_log).save("./html_output/scatter.json")
